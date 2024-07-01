@@ -27,13 +27,14 @@ const useLogin = () => {
             });
 
             const data = await res.json();
-            console.log(data);
+            // console.log(data);
 
             if(data.error) throw new Error(data.error);
 
             setAuthUserData(data);
 
             localStorage.setItem("authUser-info", JSON.stringify(data));
+            toast.success("Login is Successful");
             navigate("/");
         } catch (error) {
             toast.error(error.message);

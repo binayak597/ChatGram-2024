@@ -19,13 +19,15 @@ const useGetUserConversation = () => {
               
               const data = await res.json();
     
-              console.log(data);
+            //   console.log(data);
                
               if(data.error) throw new Error(error.message);
 
               setUsers(data.users);
             } catch (error) {
                 toast.error(error.message);
+            } finally{
+              setLoading(false);
             }
         }
 

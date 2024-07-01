@@ -28,8 +28,6 @@ const useGetSocketConnection = () => {
                 dispatch(getOnlineUsers(onlineUsers));
             });
 
-            console.log("triggered");
-
             //cleanup funtion call for performance optimization (unmount)
             return () => {
                 socket.close();

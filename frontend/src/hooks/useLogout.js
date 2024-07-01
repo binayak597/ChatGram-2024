@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useAuthContext } from "../context/AuthContext";
 import { useDispatch } from "react-redux";
 import { retrieveSelectedUser } from "../redux/reducers/messageSlice";
+import toast from "react-hot-toast";
 
 
 const useLogout = () => {
@@ -27,7 +28,7 @@ const useLogout = () => {
             // dispatch(retrieveSelectedUser());
             localStorage.removeItem("authUser-info");
             if(data.error) throw new Error(data.error);
-            
+            toast.success("Successfully logout");
         } catch (error) {
             toast.error(error.message);
         }finally{

@@ -25,8 +25,9 @@ const useSignup = () => {
             });
 
             const data = await res.json();
-            console.log(data);
+            // console.log(data);
             if(data.error) throw new Error(data.error);
+            toast.success("successfully registered");
             navigate("/login");
 
         } catch (error) {
