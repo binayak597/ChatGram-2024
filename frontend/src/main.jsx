@@ -6,6 +6,11 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Home from './pages/home/Home.jsx'
 import Signup from './pages/signup/Signup.jsx'
 import Login from './pages/login/Login.jsx'
+import { Toaster } from 'react-hot-toast'
+import { AuthContextPovider } from './context/AuthContext.jsx'
+import Protected from './components/protected/Protected.jsx'
+import store from './redux/store.js'
+import {Provider} from "react-redux"
 
 const router = createBrowserRouter([
   {
@@ -14,22 +19,33 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home />
+        element: <Protected><Home /></Protected>
       },
       {
-        path: "/signup",
+        path: "signup",
         element: <Signup />
       },
       {
-        path: "/login",
+        path: "login",
         element: <Login />
       }
     ]
+  },
+  //handling invalid routes
+  {
+    path: "*",
+    element: <div>No Data Found</div>
   }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router}  />
+    <AuthContextPovider>
+      <Provider store={store}>
+        <RouterProvider router={router}  />
+        <Toaster />
+      </Provider>
+    </AuthContextPovider>
+    
   </React.StrictMode>,
 )

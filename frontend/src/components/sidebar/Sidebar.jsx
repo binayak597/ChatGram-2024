@@ -1,6 +1,6 @@
 import React from 'react'
 import SearchInput from './SearchInput'
-import OnlineUserList from './OnlineUserList'
+import UserList from './UserList'
 import LogoutBtn from './LogoutBtn'
 
 const Sidebar = () => {
@@ -8,7 +8,7 @@ const Sidebar = () => {
     <div className='border-r border-slate-500 p-4 flex flex-col'>
       <SearchInput />
       <div className='divider py-3'></div>
-      <OnlineUserList />
+      <UserList />
       <LogoutBtn />
     </div>
   )

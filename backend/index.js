@@ -1,18 +1,20 @@
 import * as dotenv from 'dotenv';
 dotenv.config();
-
-import express from 'express';
+import express from "express";
 import connectToDBusingMongoose from './src/config/mongooseConfig.js';
 import userRouter from "./src/features/users/users.routes.js";
 import cookieParser from 'cookie-parser';
 import jwtAuth from './src/middlewares/jwtAuth.middleware.js';
 import messageRouter from './src/features/messages/messages.routes.js';
+import cors from "cors";
+import { app, server } from './socket/socket.js';
 
-const app = express();
 
 app.use(cookieParser());
 
 app.use(express.json()); //parse the incoming req json payload data
+
+app.use(cors());
 
 //api gateway
 
@@ -29,7 +31,7 @@ app.get("/", (req, res) => res.send("welcome"));
 
 let PORT = process.env.PORT || 3200;
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
 
     connectToDBusingMongoose();
     console.log(`server is running on ${PORT}.`);

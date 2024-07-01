@@ -1,3 +1,4 @@
+import { getSocketUserId, io } from "../../../socket/socket.js";
 import ApplicationError from "../../error-handler/applicationError.js";
 import ConverSationModel from "./conversation.schema.js";
 import MessageModel from "./messages.schema.js";
@@ -40,6 +41,17 @@ export default class MessageRepository{
             // await conversation.save();
 
             await Promise.all([newMessage.save(), conversation.save()]); //both will operate parallely
+
+
+            //socket server functionality goes here
+
+            const socketUserId = getSocketUserId(receiverId);
+
+            if(socketUserId){
+                
+                //io.to(<socketId>).emit() used to send event to a specific connected client
+                io.to(socketUserId).emit("newMessage", newMessage);
+            }
 
             return newMessage;
 

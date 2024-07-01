@@ -1,8 +1,10 @@
 import React from 'react'
 import Sidebar from '../../components/sidebar/Sidebar'
 import MessageContainer from '../../components/messageContainer/MessageContainer'
+import useGetSocketConnection from '../../hooks/useGetSocketConnection'
 
 const Home = () => {
+  useGetSocketConnection();
   return (
     <div className='flex sm:h-[450px] md:h-[550px] rounded-lg overflow-hidden bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0'>
       <Sidebar />

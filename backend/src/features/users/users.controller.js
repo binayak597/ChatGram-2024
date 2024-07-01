@@ -47,8 +47,8 @@ export default class UserController{
 
         //get he random profile pic for boy and girl depend upon gender
 
-        const boyProfilePic = "https://avatar.iran.liara.run/public/boy";
-        const girlProfilePic = "https://avatar.iran.liara.run/public/girl";
+        const boyProfilePic = `https://avatar.iran.liara.run/public/boy?username=${userName}`;
+        const girlProfilePic = `https://avatar.iran.liara.run/public/girl?username=${userName}`;
         
         const newUser = new UserModel(fullName, userName, email, hashedPassword, gender, gender === "male"? boyProfilePic: girlProfilePic);
 
@@ -59,7 +59,7 @@ export default class UserController{
             fullName: createdUser.fullName,
             userName: createdUser.userName,
             gender: createdUser.gender,
-            boyProfilePic: createdUser.profilePic
+            profilePic: createdUser.profilePic
          });
 
         } catch (err) {
@@ -90,7 +90,7 @@ export default class UserController{
                 fullName: isUser.fullName,
                 userName: isUser.userName,
                 gender: isUser.gender,
-                boyProfilePic: isUser.profilePic
+                profilePic: isUser.profilePic
             })
         } catch (err) {
             console.error("error while signin controller -> " + err.message);

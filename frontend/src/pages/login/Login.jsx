@@ -1,7 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {Link} from 'react-router-dom'
+import useLogin from '../../hooks/useLogin';
 
 const Login = () => {
+
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const {loading, postLoginData} = useLogin();
+
+  const handleSubmit = async (ev) => {
+    ev.preventDefault();
+    // console.log(userName, password);
+    await postLoginData(userName, password);
+  }
   return (
     <div className='flex flex-col justify-center items-center min-w-96 mx-auto'>
       <div className='w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0'>
@@ -9,7 +20,7 @@ const Login = () => {
             Login <span className='text-blue-500'>ChatGram</span>
           </h1>
 
-          <form>
+          <form onSubmit={handleSubmit}>
 
             <div>
               <label className='label p-2'>
@@ -19,6 +30,8 @@ const Login = () => {
 							type='text'
 							placeholder='johndoe'
 							className='w-full input input-bordered  h-10'
+              value={userName}
+              onChange={(ev) => setUserName(ev.target.value)}
 						  />
             </div>
 
@@ -30,6 +43,8 @@ const Login = () => {
 							type='password'
 							placeholder='Enter Password'
 							className='w-full input input-bordered  h-10'
+              value={password}
+              onChange={(ev) => setPassword(ev.target.value)}
 						  />
             </div>
 
@@ -41,8 +56,11 @@ const Login = () => {
             </Link>
 
             <div>
-						<button className='btn btn-block btn-sm mt-2 border border-slate-700'>
-							Login
+						<button 
+            className='btn btn-block btn-sm mt-2 border border-slate-700'
+            disabled={loading}
+            >
+            {loading? <span className="loading loading-spinner loading-md"></span>: 'Login'}
 						</button>
 					</div>
 

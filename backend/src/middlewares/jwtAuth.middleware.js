@@ -16,7 +16,7 @@ const jwtAuth = (req, res, next) => {
 
         req.userId = payload.userId;
 
-        console.log("Payload details of JWTToken -> " + payload);
+        console.log("Payload details of JWTToken -> ", payload);
 
     } catch (err) {
 
